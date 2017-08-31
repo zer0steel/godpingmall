@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import com.jyc.godpingmall.enums.StatusCode;
+import com.jyc.godpingmall.status.enums.StatusCode;
 import com.jyc.godpingmall.testutil.VOProvider;
 
 public class GoodsTest {

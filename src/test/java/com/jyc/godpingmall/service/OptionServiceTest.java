@@ -15,8 +15,8 @@ import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.jyc.godpingmall.dao.OptionDAO;
-import com.jyc.godpingmall.enums.StatusCode;
 import com.jyc.godpingmall.service.checker.OptionChecker;
+import com.jyc.godpingmall.status.enums.StatusCode;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OptionServiceTest {

@@ -3,7 +3,7 @@ package com.jyc.godpingmall.vo;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import com.jyc.godpingmall.enums.StatusCode;
+import com.jyc.godpingmall.status.enums.StatusCode;
 
 public class GoodsOption implements ValidationChecker {
 

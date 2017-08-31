@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
-import com.jyc.godpingmall.enums.StatusCode;
+import com.jyc.godpingmall.status.enums.StatusCode;
 
 public class Goods implements ValidationChecker {
 
@@ -80,7 +80,7 @@ public class Goods implements ValidationChecker {
 			return StatusCode.EMPTY_VALUE.setExtraMessage("상품이름");
 		if(Objects.isNull(price))
 			return StatusCode.EMPTY_VALUE.setExtraMessage("판매가격");
-		if(Objects.isNull(category) || Objects.isNull(category.getId())) {
+		if(Objects.isNull(category) || ValidationChecker.isEmpty(category.getName())) {
 			return StatusCode.EMPTY_VALUE.setExtraMessage("카테고리");
 		}
 		return StatusCode.SUCCESS;

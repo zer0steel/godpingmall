@@ -1,11 +1,13 @@
 package com.jyc.godpingmall.vo;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.jyc.godpingmall.enums.CategoryCode;
-import com.jyc.godpingmall.enums.StatusCode;
+import com.jyc.godpingmall.status.enums.CategoryCode;
+import com.jyc.godpingmall.status.enums.StatusCode;
 
 public class CategoryTest {
 	
@@ -36,7 +38,7 @@ public class CategoryTest {
 	public void check_topCategory_should_be_fail_when_superCategory_is_exist() {
 		Category topCategory = new Category();
 		topCategory.setName("최상위카테고리");
-		topCategory.setSuperCategory("부모카테고리");
+		topCategory.setSuperName("부모카테고리");
 		
 		StatusCode result = topCategory.checkValue();
 		
@@ -47,10 +49,77 @@ public class CategoryTest {
 	public void check_subCategory_should_be_fail_when_superCategory_is_not_exist() {
 		Category subCategory = new Category();
 		subCategory.setName("자식카테고리");
-		subCategory.setLevel(1);
+		subCategory.setLevel("1");
 		
 		StatusCode result = subCategory.checkValue();
 		
 		assertEquals(CategoryCode.SUB_CATEGORY_BUT_NOT_HAVING_SUPER_CAEGORY.getCode(), result.getCode());
+	}
+	
+	@Test
+	public void check_superCategory_should_be_success() {
+		Category superCategory = new Category();
+		superCategory.setName("상위카테고리");
+		Category subCategory = new Category();
+		subCategory.setName("하위카테고리");
+		subCategory.setLevel("1");
+		subCategory.setSuperName("상위카테고리");
+		
+		StatusCode result = subCategory.checkSuperCategory(superCategory);
+		
+		assertEquals(StatusCode.SUCCESS, result);
+	}
+	
+	@Test
+	public void check_superCategory_should_be_fail_when_superCategory_is_null() {
+		Category subCategory = new Category();
+		subCategory.setName("하위카테고리");
+		subCategory.setLevel("1");
+		subCategory.setSuperName("상위카테고리");
+		
+		StatusCode result = subCategory.checkSuperCategory(null);
+		
+		assertEquals(StatusCode.NONE_VALUE, result);
+	}
+	
+	@Test
+	public void check_superCategory_should_be_fail_when_superCategoryName_is_null() {
+		Category superCategory = new Category();
+		Category subCategory = new Category();
+		subCategory.setName("하위카테고리");
+		subCategory.setLevel("1");
+		subCategory.setSuperName("상위카테고리");
+		
+		StatusCode result = subCategory.checkSuperCategory(superCategory);
+		
+		assertEquals(StatusCode.NONE_VALUE, result);
+	}
+	
+	@Test
+	public void check_superCategory_should_be_fail_when_subName_and_superName_is_not_equals() {
+		Category superCategory = new Category();
+		superCategory.setName("다른카테고리");
+		Category subCategory = new Category();
+		subCategory.setName("하위카테고리");
+		subCategory.setLevel("1");
+		subCategory.setSuperName("상위카테고리");
+		
+		StatusCode result = subCategory.checkSuperCategory(superCategory);
+		
+		assertEquals(StatusCode.NONE_VALUE, result);
+	}
+	
+	@Test
+	public void check_superCategory_should_be_fail_when_level_check_is_fail() {
+		Category superCategory = new Category();
+		superCategory.setName("상위카테고리");
+		Category subCategory = new Category();
+		subCategory.setName("하위카테고리");
+		subCategory.setLevel("2");
+		subCategory.setSuperName("상위카테고리");
+		
+		StatusCode result = subCategory.checkSuperCategory(superCategory);
+		
+		assertEquals(StatusCode.NONE_VALUE, result);
 	}
 }

@@ -1,9 +1,10 @@
-package com.jyc.godpingmall.enums;
+package com.jyc.godpingmall.status.enums;
 
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.jyc.godpingmall.status.Status;
 
 /**
  * <p>가장 기본적인 반환코드

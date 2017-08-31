@@ -15,8 +15,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.jyc.godpingmall.dao.GoodsOptionDAO;
-import com.jyc.godpingmall.enums.StatusCode;
 import com.jyc.godpingmall.service.checker.OptionChecker;
+import com.jyc.godpingmall.status.enums.StatusCode;
 import com.jyc.godpingmall.testutil.VOProvider;
 import com.jyc.godpingmall.vo.GoodsOption;
 

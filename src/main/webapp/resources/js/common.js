@@ -5,3 +5,10 @@ const ajax = function(url, data, method) {
 		method : method || 'GET'
 	});
 }
+
+const handlingResult = function(result, redirectUrl) {
+	if(result.success)
+		location.href = redirectUrl;
+	else
+		alert(result.message);
+}

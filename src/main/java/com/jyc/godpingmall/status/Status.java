@@ -1,4 +1,4 @@
-package com.jyc.godpingmall.enums;
+package com.jyc.godpingmall.status;
 
 /**
  * enum 반환코드 확장 인터페이스

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jyc.godpingmall.enums.StatusCode;
 import com.jyc.godpingmall.service.GoodsService;
+import com.jyc.godpingmall.status.enums.StatusCode;
 import com.jyc.godpingmall.util.AdminModelAndView;
 import com.jyc.godpingmall.vo.Goods;
 

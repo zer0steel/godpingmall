@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jyc.godpingmall.dao.CategoryDAO;
-import com.jyc.godpingmall.enums.StatusCode;
 import com.jyc.godpingmall.service.checker.CategoryChecker;
+import com.jyc.godpingmall.status.enums.StatusCode;
 import com.jyc.godpingmall.vo.Category;
 
 @Service

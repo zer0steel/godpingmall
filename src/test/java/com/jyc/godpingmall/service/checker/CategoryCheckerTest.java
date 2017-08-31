@@ -12,8 +12,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.jyc.godpingmall.dao.CategoryDAO;
-import com.jyc.godpingmall.enums.CategoryCode;
-import com.jyc.godpingmall.enums.StatusCode;
+import com.jyc.godpingmall.status.enums.CategoryCode;
+import com.jyc.godpingmall.status.enums.StatusCode;
 import com.jyc.godpingmall.testutil.VOProvider;
 import com.jyc.godpingmall.vo.Category;
 
@@ -54,8 +54,8 @@ public class CategoryCheckerTest {
 	public void check_subCategory_should_be_success() {
 		Category subCategory = new Category();
 		subCategory.setName("성공 하위카테고리");
-		subCategory.setLevel(1);
-		subCategory.setSuperCategory("상위카테고리");
+		subCategory.setLevel("1");
+		subCategory.setSuperName("상위카테고리");
 		
 		StatusCode result = checker.isValid(subCategory);
 		
@@ -75,19 +75,19 @@ public class CategoryCheckerTest {
 	public void check_subCategory_should_be_fail_when_superCategory_is_not_found() {
 		Category newCategory = new Category();
 		newCategory.setName("하위카테고리");
-		newCategory.setLevel(1);
-		newCategory.setSuperCategory("없는 상위카테고리");
+		newCategory.setLevel("1");
+		newCategory.setSuperName("없는 상위카테고리");
 		
 		Category newCategory2 = new Category();
 		newCategory2.setName("하위카테고리");
-		newCategory2.setLevel(2);
-		newCategory2.setSuperCategory("상위카테고리");
+		newCategory2.setLevel("2");
+		newCategory2.setSuperName("상위카테고리");
 		
 		StatusCode result = checker.isValid(newCategory);
 		StatusCode result2 = checker.isValid(newCategory2);
 		
-		assertEquals(CategoryCode.NONE_SUPER_CATEGORY.getCode(), result.getCode());
-		assertEquals(CategoryCode.NONE_SUPER_CATEGORY.getCode(), result2.getCode());
+		assertEquals(StatusCode.NONE_VALUE, result);
+		assertEquals(StatusCode.NONE_VALUE, result2);
 	}
 	
 }

@@ -3,7 +3,7 @@
 <form id="categoryInsertForm">
 	카테고리명<input type="text" name="name">
 	카테고리레벨<input type="number" name="level">
-	상위카테고리<input type="text" name="superCategory">
+	상위카테고리<input type="text" name="superName">
 	<button type="button" id="btnAddCategory">추가</button>
 </form>
 <table width="70%" border="1">
@@ -16,7 +16,7 @@
 	<tr>
 		<td>${c.value.name }</td>
 		<td>${c.value.level }</td>
-		<td>${c.value.superCategory }</td>
+		<td>${c.value.superName }</td>
 	</tr>
 	</c:forEach>
 </table>
@@ -26,10 +26,7 @@
 		const data = $('#categoryInsertForm').serializeArray();
 		checkLevel(data);
 		ajax('category', data, 'post').done(result => {
-			if(result.success)
-				location.href = 'category';
-			else
-				alert(result.message);
+			handlingResult(result, 'category');
 		});
 	});
 	

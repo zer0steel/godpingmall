@@ -12,9 +12,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.jyc.godpingmall.dao.CategoryDAO;
-import com.jyc.godpingmall.enums.CategoryCode;
-import com.jyc.godpingmall.enums.StatusCode;
 import com.jyc.godpingmall.service.checker.CategoryChecker;
+import com.jyc.godpingmall.status.enums.CategoryCode;
+import com.jyc.godpingmall.status.enums.StatusCode;
 import com.jyc.godpingmall.vo.Category;
 
 @RunWith(MockitoJUnitRunner.class)

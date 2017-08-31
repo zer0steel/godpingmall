@@ -1,15 +1,16 @@
 package com.jyc.godpingmall.vo;
 
+import java.util.Objects;
 import java.util.Optional;
 
-import com.jyc.godpingmall.enums.CategoryCode;
-import com.jyc.godpingmall.enums.StatusCode;
+import com.jyc.godpingmall.status.enums.CategoryCode;
+import com.jyc.godpingmall.status.enums.StatusCode;
 
 public class Category implements ValidationChecker {
 
 	private Long id;
 	private String name;
-	private String superCategory;
+	private String superName;
 	private int level;
 	
 	public Category() {}
@@ -29,17 +30,19 @@ public class Category implements ValidationChecker {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSuperCategory() {
-		return superCategory;
+	public String getSuperName() {
+		return superName;
 	}
-	public void setSuperCategory(String superCategory) {
-		this.superCategory = superCategory;
+	public void setSuperName(String superName) {
+		this.superName = superName;
 	}
 	public int getLevel() {
 		return level;
 	}
-	public void setLevel(int level) {
-		this.level = level;
+	public void setLevel(String level) {
+		if(ValidationChecker.isEmpty(level))
+			this.level = 0;
+		this.level = Integer.parseInt(level);
 	}
 	
 	@Override
@@ -78,12 +81,34 @@ public class Category implements ValidationChecker {
 	}
 	
 	/**
+	 * 하위 카테고리 확인
+	 * @return <p>true : 하위 카테고리</p><p>false : 최상위 카테고리</p>
+	 */
+	public boolean isSubCategory() {
+		return this.level != 0;
+	}
+	
+	/**
 	 * 상위 카테고리 가지고 있는지 확인
 	 * @return <p>true : 상위카테고리 값 존재</p>
 	 */
 	public boolean isExistSuperCategory() {
-		return Optional.ofNullable(this.superCategory)
-				.filter(category -> !category.isEmpty())
-				.isPresent();
+		return Objects.isNull(superName) ? false : !superName.isEmpty();
+	}
+	
+	/**
+	 * 상위 카테고리인지 확인한다.
+	 * @param superCategory 확인 대상 객체
+	 * @return <p> {@link StatusCode#SUCCESS} : 상위카테고리<p> {@link StatusCode#NONE_VALUE} : 상위카테고리 아님
+	 */
+	public StatusCode checkSuperCategory(Category superCategory) {
+		if(Objects.isNull(superCategory))
+			return StatusCode.NONE_VALUE.setExtraMessage("상위카테고리");
+		if(this.superName.equalsIgnoreCase(superCategory.getName()) && checkSuperLevel(superCategory))
+			return StatusCode.SUCCESS;
+		return StatusCode.NONE_VALUE.setExtraMessage("상위카테고리");
+	}
+	private boolean checkSuperLevel(Category superCategory) {
+		return this.level == superCategory.level + 1;
 	}
 }

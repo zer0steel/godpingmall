@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jyc.godpingmall.enums.StatusCode;
+import com.jyc.godpingmall.status.enums.StatusCode;
 
 public class GoodsOptionTest {
 	

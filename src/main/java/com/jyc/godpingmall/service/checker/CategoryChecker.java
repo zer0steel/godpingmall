@@ -39,7 +39,7 @@ public class CategoryChecker {
 		if(categoryMap.containsKey(category.getName()))
 			return StatusCode.OVERLAP_VALUE.setExtraMessage(category.getName());
 		if(!category.isTopCategory() && !isExistCategoryName(category))
-			return StatusCode.getStatus(CategoryCode.NONE_SUPER_CATEGORY);
+			return StatusCode.getFailStatus(CategoryCode.NONE_SUPER_CATEGORY);
 		return StatusCode.SUCCESS;
 	}
 

@@ -42,7 +42,7 @@ public enum StatusCode implements Status {
 		this.message = message;
 	}
 	
-	private String message, returnMessage;
+	private String message, customMessage;
 	private int code;
 	
 	@Override
@@ -52,7 +52,7 @@ public enum StatusCode implements Status {
 
 	@Override
 	public String getMessage() {
-		return Objects.isNull(returnMessage) ? message : returnMessage;
+		return Objects.isNull(customMessage) ? message : customMessage;
 	}
 
 	/**
@@ -61,7 +61,7 @@ public enum StatusCode implements Status {
 	 * @return {@link StatusCode} this
 	 */
 	public StatusCode setExtraMessage(String str) {
-		this.returnMessage = this.message.replace("%s", str);
+		this.customMessage = this.message.replace("%s", str);
 		return this;
 	}
 	
@@ -76,22 +76,14 @@ public enum StatusCode implements Status {
 
 	/**
 	 * <p>확장 반환코드 객체를 기본반환코드 객체로 변환.
-	 * <p>성공 이외에는 전부  {@link StatusCode#FAIL} 로 할당된다.
+	 * <p>{@link StatusCode#FAIL} 로 할당된다.
 	 * @param status
 	 * @return {@link StatusCode}
 	 */
-	public static StatusCode getStatus(Status status) {
-		return isSuccess(status) ? StatusCode.SUCCESS : getFailStatus(status);
-	}
-
-	private static StatusCode getFailStatus(Status status) {
+	public static StatusCode getFailStatus(Status status) {
 		StatusCode fail = StatusCode.FAIL;
 		fail.setStatus(status);
 		return fail;
-	}
-
-	private static boolean isSuccess(Status status) {
-		return status.getMessage().equalsIgnoreCase(Status.SUCCESS);
 	}
 
 	/**

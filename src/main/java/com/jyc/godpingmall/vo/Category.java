@@ -47,9 +47,9 @@ public class Category implements ValidationChecker {
 		if(ValidationChecker.isEmpty(name))
 			return StatusCode.EMPTY_VALUE.setExtraMessage("카테고리 이름");
 		if(isTopCategoryAndExistSuperCategory())
-			return StatusCode.getStatus(CategoryCode.TOP_CATEGORY_BUT_HAVING_SUPER_CAEGORY);
+			return StatusCode.getFailStatus(CategoryCode.TOP_CATEGORY_BUT_HAVING_SUPER_CAEGORY);
 		if(isSubCategoryAndNoneSuperCategory())
-			return StatusCode.getStatus(CategoryCode.SUB_CATEGORY_BUT_NOT_HAVING_SUPER_CAEGORY);
+			return StatusCode.getFailStatus(CategoryCode.SUB_CATEGORY_BUT_NOT_HAVING_SUPER_CAEGORY);
 		return StatusCode.SUCCESS;
 	}
 	

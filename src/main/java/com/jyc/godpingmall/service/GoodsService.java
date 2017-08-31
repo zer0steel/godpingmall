@@ -52,7 +52,7 @@ public class GoodsService {
 		StatusCode result = newGoods.checkValue();
 		if(result.isSuccess()) {
 			Category category = newGoods.getCategory();
-			if(!categoryChecker.loadCategoryAndcheckExistCategoryName(category))
+			if(!categoryChecker.loadCategoryAndCheckExistCategoryName(category))
 				result = StatusCode.NONE_VALUE.setExtraMessage(String.format("%s 카테고리", category.getName()));
 			if(result.isSuccess())
 				result = isOverlapGoodsName(newGoods.getName());

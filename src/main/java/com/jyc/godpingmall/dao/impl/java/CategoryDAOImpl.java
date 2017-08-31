@@ -11,7 +11,7 @@ import com.jyc.godpingmall.vo.Category;
 @Repository
 class CategoryDAOImpl implements CategoryDAO {
 	
-	private static final Map<String, Category> map = new HashMap<>();
+	static final Map<String, Category> map = new HashMap<>();
 
 	@Override
 	public void insertNewCategory(Category newCategory) {

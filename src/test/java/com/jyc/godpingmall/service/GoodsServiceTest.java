@@ -33,7 +33,7 @@ public class GoodsServiceTest {
 		Category category = VOProvider.getCategory();
 		Goods g = new Goods("상품이름", BigDecimal.ZERO, category);
 		
-		when(categoryChecker.loadCategoryAndcheckExistCategoryName(category)).thenReturn(true);
+		when(categoryChecker.loadCategoryAndCheckExistCategoryName(category)).thenReturn(true);
 		when(goodsOptionService.addNewGoodsOption(g.getGoodsOptionList())).thenReturn(StatusCode.SUCCESS);
 		StatusCode result = goodsService.addNewGoods(g);
 		
@@ -45,7 +45,7 @@ public class GoodsServiceTest {
 		Category category = VOProvider.getCategory();
 		Goods g = new Goods("상품이름", BigDecimal.ZERO, category);
 		
-		when(categoryChecker.loadCategoryAndcheckExistCategoryName(category)).thenReturn(false);
+		when(categoryChecker.loadCategoryAndCheckExistCategoryName(category)).thenReturn(false);
 		StatusCode result = goodsService.addNewGoods(g);
 		
 		assertEquals(StatusCode.NONE_VALUE, result);
@@ -68,7 +68,7 @@ public class GoodsServiceTest {
 		
 		Goods g = new Goods(overlapName, BigDecimal.ZERO, category);
 		
-		when(categoryChecker.loadCategoryAndcheckExistCategoryName(category)).thenReturn(true);
+		when(categoryChecker.loadCategoryAndCheckExistCategoryName(category)).thenReturn(true);
 		when(goodsDao.getGoodsMap()).thenReturn(VOProvider.getGoodsMap());
 		
 		StatusCode result = goodsService.addNewGoods(g);

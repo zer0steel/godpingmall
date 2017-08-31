@@ -10,7 +10,7 @@ import com.jyc.godpingmall.dao.OptionDAO;
 @Repository
 class OptionDAOImpl implements OptionDAO {
 	
-	private List<String> list = new ArrayList<>();
+	static final List<String> list = new ArrayList<>();
 
 	@Override
 	public void insertNewOption(String optionName) {

@@ -35,7 +35,7 @@ public class CategoryChecker {
 	 * @return {@link StatusCode}
 	 */
 	private StatusCode checkExistValue(Category category) {
-		if(loadCategoryAndcheckExistCategoryName(category))
+		if(loadCategoryAndCheckExistCategoryName(category))
 			return StatusCode.OVERLAP_VALUE.setExtraMessage(category.getName());
 		if(category.isSubCategory())
 			return category.checkSuperCategory(getSuperCategory(category));
@@ -47,7 +47,7 @@ public class CategoryChecker {
 	 * @param categoryName
 	 * @return <p>true : 존재하는 카테고리 이름
 	 */
-	public boolean loadCategoryAndcheckExistCategoryName(Category category) {
+	public boolean loadCategoryAndCheckExistCategoryName(Category category) {
 		categoryMap = categoryDao.getCategoryMap();
 		return categoryMap.containsKey(category.getName());
 	}

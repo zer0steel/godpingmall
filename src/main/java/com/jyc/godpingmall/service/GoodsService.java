@@ -21,22 +21,33 @@ public class GoodsService {
 	@Autowired private GoodsDAO goodsDao;
 	@Autowired private CategoryChecker categoryChecker;
 	@Autowired private GoodsOptionService goodsOptionService;
+	@Autowired private StockService stockService;
+
+	/**
+	 * 데이터 유효성 검사 후 신규 상품 등록
+	 * @param newGoods
+	 * @return
+	 */
+	
+	public StatusCode addNewGoods(Goods newGoods) {
+		StatusCode result = validationCheck(newGoods);
+		if(result.isSuccess()) {
+			result = insertGoodsData(newGoods);
+		}
+		return result;
+	}
 
 	/**
 	 * 신규 상품 등록
 	 * @param newGoods
 	 * @return
 	 */
-	@Transactional(rollbackFor = RuntimeException.class)
-	public StatusCode addNewGoods(Goods newGoods) {
-		StatusCode result = validationCheck(newGoods);
+	@Transactional
+	private StatusCode insertGoodsData(Goods newGoods) {
+		goodsDao.insertNewGoods(newGoods);
+		StatusCode result = goodsOptionService.addNewGoodsOption(newGoods.getGoodsOptionList());
 		if(result.isSuccess()) {
-			goodsDao.insertNewGoods(newGoods);
-			result = goodsOptionService.addNewGoodsOption(newGoods.getGoodsOptionList());
-			if(result.isNotSuccess()) {
-			}
 		}
-//			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
 		return result;
 	}
 	

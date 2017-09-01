@@ -8,7 +8,15 @@ import com.jyc.godpingmall.status.enums.StatusCode;
 public class GoodsOption implements ValidationChecker {
 
 	private Long id, goodsId;
+	/**
+	 * <p>옵션 이름
+	 * <p>ex) 색상 (옵션이름) : 빨간색, 파란색, 보라색 (옵션 값)
+	 */
 	private String optionName;
+	/**
+	 * <p>옵션 값
+	 * <p>ex) 색상 (옵션이름) : 빨간색, 파란색, 보라색 (옵션 값)
+	 */
 	private String optionValue;
 	private BigDecimal extraPrice = BigDecimal.ZERO;
 	public GoodsOption() {}
@@ -37,6 +45,10 @@ public class GoodsOption implements ValidationChecker {
 	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
+	/**
+	 * 옵션 이름 반환
+	 * @return {@link #optionName}
+	 */
 	public String getOptionName() {
 		return optionName;
 	}
@@ -49,6 +61,10 @@ public class GoodsOption implements ValidationChecker {
 	public void setExtraPrice(BigDecimal extraPrice) {
 		this.extraPrice = extraPrice;
 	}
+	/**
+	 * 옵션 값 반환
+	 * @return {@link #optionValue}
+	 */
 	public String getOptionValue() {
 		return optionValue;
 	}
@@ -66,4 +82,10 @@ public class GoodsOption implements ValidationChecker {
 			return StatusCode.EMPTY_VALUE.setExtraMessage("옵션값");
 		return StatusCode.SUCCESS;
 	}
+	@Override
+	public String toString() {
+		return "GoodsOption [id=" + id + ", goodsId=" + goodsId + ", optionName=" + optionName + ", optionValue="
+				+ optionValue + ", extraPrice=" + extraPrice + "]";
+	}
+	
 }
